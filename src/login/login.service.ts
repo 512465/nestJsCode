@@ -1,26 +1,31 @@
 import { Injectable } from '@nestjs/common';
 import { CreateLoginDto } from './dto/create-login.dto';
-import { UpdateLoginDto } from './dto/update-login.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Login } from './entities/login.entity';
 
 @Injectable()
 export class LoginService {
-  create(createLoginDto: CreateLoginDto) {
-    return 'This action adds a new login';
-  }
+  constructor(
+    @InjectRepository(Login)
+    private readonly loginRepository: Repository<Login>,
+  ) {}
 
-  findAll() {
-    return `This action returns all login`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} login`;
-  }
-
-  update(id: number, updateLoginDto: UpdateLoginDto) {
-    return `This action updates a #${id} login`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} login`;
+  async login(createLoginDto: CreateLoginDto) {
+    console.log(createLoginDto);
+    const { username, password } = createLoginDto;
+    if (username === 'CodePaint' && password === '123456') {
+      return {
+        code: 200,
+        message: '登录成功',
+        data: createLoginDto,
+      };
+    } else {
+      return {
+        code: 500,
+        message: '用户名或密码错误',
+        data: createLoginDto,
+      };
+    }
   }
 }
