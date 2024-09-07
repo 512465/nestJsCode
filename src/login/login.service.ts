@@ -12,7 +12,7 @@ export class LoginService {
   ) {}
 
   async login(createLoginDto: CreateLoginDto) {
-    console.log(createLoginDto);
+    // console.log(createLoginDto);
     const { username, password } = createLoginDto;
     if (username === 'CodePaint' && password === '123456') {
       return {
@@ -27,5 +27,14 @@ export class LoginService {
         data: createLoginDto,
       };
     }
+  }
+
+  async findOne(username: string) {
+    return await this.loginRepository.findOne({ where: { username } });
+  }
+
+  async save(login: Login) {
+    // console.log(login);
+    return await this.loginRepository.save(login);
   }
 }
