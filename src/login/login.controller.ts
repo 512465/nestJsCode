@@ -8,7 +8,7 @@ export class LoginController {
 
   @Post()
   async login(@Body() createLoginDto: CreateLoginDto) {
-    console.log(createLoginDto);
+    // console.log(createLoginDto);
     return this.loginService.login(createLoginDto);
   }
 }

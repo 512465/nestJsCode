@@ -5,6 +5,13 @@ import { HttpExceptionFilter } from './common/filter/http-exception/http-excepti
 import { TransformInterceptor } from './common/interceptor/transform/transform.interceptor';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  // 设置跨域
+  app.enableCors({
+    origin: '*', // 允许任何域名访问
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // 允许的方法
+    allowedHeaders: 'Content-Type, Authorization', // 允许的头部
+  });
+  // 设置文档
   const options = new DocumentBuilder()
     .setTitle('工作室接口文档')
     .setDescription('工作室后端接口测试文档')
