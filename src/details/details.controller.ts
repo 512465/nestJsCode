@@ -1,34 +1,25 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Query } from '@nestjs/common';
 import { DetailsService } from './details.service';
-import { CreateDetailDto } from './dto/create-detail.dto';
-import { UpdateDetailDto } from './dto/update-detail.dto';
+import { Detail } from './entities/detail.entity';
 
 @Controller('details')
 export class DetailsController {
   constructor(private readonly detailsService: DetailsService) {}
 
-  @Post()
-  create(@Body() createDetailDto: CreateDetailDto) {
-    return this.detailsService.create(createDetailDto);
+  @Post('add')
+  async createDetail(
+    @Body('name') name: string,
+    @Body('grade') grade: string,
+    @Body('department') department: string,
+  ): Promise<Detail> {
+    return this.detailsService.create(name, grade, department);
   }
 
   @Get()
-  findAll() {
-    return this.detailsService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.detailsService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDetailDto: UpdateDetailDto) {
-    return this.detailsService.update(+id, updateDetailDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.detailsService.remove(+id);
+  async getDetailsWithPagination(
+    @Query('page') page: number = 1,
+    @Query('pageSize') pageSize: number = 10,
+  ): Promise<{ data: Detail[]; total: number }> {
+    return this.detailsService.getDetailsWithPagination(page, pageSize);
   }
 }
