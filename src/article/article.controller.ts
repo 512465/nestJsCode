@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { UpdateArticleDto } from './dto/update-article.dto';
@@ -17,9 +26,18 @@ export class ArticleController {
     return this.articleService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.articleService.findOne(+id);
+  @Get('keyword')
+  findAllByKeyword(
+    @Query() query: { keyWord: string; page: number; pageSize: number },
+  ) {
+    return this.articleService.findAllByKeyword(query);
+  }
+
+  @Get('type')
+  findAllByType(
+    @Query() query: { type: string; page: number; pageSize: number },
+  ) {
+    return this.articleService.findAllByType(query);
   }
 
   @Patch(':id')
@@ -30,5 +48,10 @@ export class ArticleController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.articleService.remove(+id);
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.articleService.findOne(+id);
   }
 }
