@@ -5,11 +5,14 @@ export class Detail {
   id: number;
 
   @Column()
-  name: string;
+  content: string;
 
   @Column()
-  grade: string;
+  type: string;
 
   @Column()
-  department: string;
+  contact: string;
+
+  @Column()
+  updateTime: Date;
 }
