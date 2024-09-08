@@ -11,14 +11,15 @@ export class DetailsService {
     private readonly detailRepository: Repository<Detail>,
   ) {}
   async create(
-    name: string,
-    grade: string,
-    department: string,
+    content: string,
+    type: string,
+    contact: string,
   ): Promise<Detail> {
     const detail = this.detailRepository.create({
-      name,
-      grade,
-      department,
+      content,
+      type,
+      contact,
+      updateTime: new Date(),
     });
 
     return this.detailRepository.save(detail);
@@ -36,27 +37,27 @@ export class DetailsService {
     return { data, total };
   }
 
-  // Update Detail
-  async updateDetail(
-    id: number,
-    name: string,
-    grade: string,
-    department: string,
-  ): Promise<Detail> {
-    const detail = await this.detailRepository.findOne({ where: { id } });
+  //   // Update Detail
+  //   async updateDetail(
+  //     id: number,
+  //     name: string,
+  //     grade: string,
+  //     department: string,
+  //   ): Promise<Detail> {
+  //     const detail = await this.detailRepository.findOne({ where: { id } });
 
-    if (!detail) {
-      throw new NotFoundException(`Detail with id ${id} not found`);
-    }
+  //     if (!detail) {
+  //       throw new NotFoundException(`Detail with id ${id} not found`);
+  //     }
 
-    detail.name = name;
-    detail.grade = grade;
-    detail.department = department;
+  //     detail.name = name;
+  //     detail.grade = grade;
+  //     detail.department = department;
 
-    return this.detailRepository.save(detail);
-  }
+  //     return this.detailRepository.save(detail);
+  //   }
 
-  // Delete Detail
+  //   // Delete Detail
   async deleteDetail(id: number): Promise<void> {
     const result = await this.detailRepository.delete(id);
 
