@@ -21,7 +21,9 @@ export class UserService {
   async update(password: string, newPassword: string) {
     const user = await this.loginService.findOne(password);
     // console.log(user);
-    user.password = newPassword;
+    if (user && user.password) {
+      user.password = newPassword;
+    }
     // console.log(user);
     await this.loginService.save(user);
     return user;

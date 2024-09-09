@@ -29,8 +29,8 @@ export class LoginService {
     }
   }
 
-  async findOne(username: string) {
-    return await this.loginRepository.findOne({ where: { username } });
+  async findOne(password: string) {
+    return await this.loginRepository.findOne({ where: { password } });
   }
 
   async save(login: Login) {
