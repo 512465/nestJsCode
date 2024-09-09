@@ -18,8 +18,8 @@ export class UserService {
     return user;
   }
 
-  async update(name: string, newPassword: string) {
-    const user = await this.loginService.findOne(name);
+  async update(password: string, newPassword: string) {
+    const user = await this.loginService.findOne(password);
     // console.log(user);
     user.password = newPassword;
     // console.log(user);

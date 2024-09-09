@@ -9,7 +9,7 @@ export class Login {
   @Column({ default: 'CodePaint', update: false })
   username: string;
 
-  @Column({ default: 123456 })
+  @Column({ default: '123456' })
   password: string;
 
   @OneToMany(() => User, (user) => user.login)

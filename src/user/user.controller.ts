@@ -16,7 +16,7 @@ export class UserController {
   @Patch('/NewPassword')
   async update(@Body() body) {
     // console.log(body);
-    const { name, newPassword } = body;
-    return this.userService.update(name, newPassword);
+    const { password, newPassword } = body;
+    return this.userService.update(password, newPassword);
   }
 }
