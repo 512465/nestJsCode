@@ -14,7 +14,10 @@ export class LoginService {
   async login(createLoginDto: CreateLoginDto) {
     // console.log(createLoginDto);
     const { username, password } = createLoginDto;
-    if (username === 'CodePaint' && password === '123456') {
+    const login = await this.loginRepository.findOne({ where: { username } });
+    // console.log(login);
+    // console.log(username, password);
+    if (username === 'CodePaint' && password === login.password) {
       return {
         code: 200,
         message: '登录成功',
