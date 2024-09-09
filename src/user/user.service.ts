@@ -21,6 +21,12 @@ export class UserService {
   async update(password: string, newPassword: string) {
     const user = await this.loginService.findOne(password);
     // console.log(user);
+    if (!user) {
+      return {
+        code: 500,
+        message: '原密码错误',
+      };
+    }
     if (user && user.password) {
       user.password = newPassword;
     }
