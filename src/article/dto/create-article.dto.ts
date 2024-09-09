@@ -7,9 +7,9 @@ export class CreateArticleDto {
 
   articleCreatedTime: Date;
 
-  aritcleAuthor: string;
+  articleAuthor: string;
 
-  atictleLookCount: number;
+  articleLookCount: number;
 
   articleType: string;
 }

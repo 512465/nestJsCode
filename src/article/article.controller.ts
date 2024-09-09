@@ -40,6 +40,11 @@ export class ArticleController {
     return this.articleService.findAllByType(query);
   }
 
+  @Get('typelist')
+  getTypeList() {
+    return this.articleService.findTypeList();
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateArticleDto: UpdateArticleDto) {
     return this.articleService.update(+id, updateArticleDto);
