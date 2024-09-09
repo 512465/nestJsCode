@@ -14,8 +14,8 @@ export class ArticleService {
     const data = new Article();
     data.articleTitle = createArticleDto.articleTitle;
     data.articleContent = createArticleDto.articleContent;
-    data.aritcleAuthor = createArticleDto.aritcleAuthor;
-    data.atictleLookCount = createArticleDto.atictleLookCount;
+    data.articleAuthor = createArticleDto.articleAuthor;
+    data.articleLookCount = createArticleDto.articleLookCount;
     data.articleType = createArticleDto.articleType;
     return await this.article.save(data).then(() => {
       return { code: 200, message: '创建成功', data: data };
@@ -41,6 +41,8 @@ export class ArticleService {
     page: number;
     pageSize: number;
   }) {
+    query.page = query.page || 1;
+    query.pageSize = query.pageSize || 10;
     const data = await this.article.find({
       where: {
         articleTitle: Like(`%${query.keyWord}%`),
@@ -65,6 +67,8 @@ export class ArticleService {
   }
 
   async findAllByType(query: { type: string; page: number; pageSize: number }) {
+    query.page = query.page || 1;
+    query.pageSize = query.pageSize || 10;
     const data = await this.article.find({
       where: {
         articleType: Like(`%${query.type}%`),
@@ -101,5 +105,19 @@ export class ArticleService {
       return { code: 400, message: '文章未找到或删除失败' };
     }
     return { code: 200, message: '删除成功', data: data };
+  }
+
+  async findTypeList() {
+    const data = await this.article.find({ select: ['articleType'] });
+    const typelist = data.map((item) => item.articleType).join(',');
+    const list = Array.from(new Set(typelist.split(','))).join(',');
+
+    // console.log(data);s
+
+    return {
+      code: 200,
+      message: '查询成功',
+      data: list,
+    };
   }
 }

@@ -18,10 +18,10 @@ export class Article {
   articleCreatedTime: Date;
 
   @Column()
-  aritcleAuthor: string;
+  articleAuthor: string;
 
   @Column({ type: 'int', default: 0 })
-  atictleLookCount: number;
+  articleLookCount: number;
 
   @Column()
   articleType: string;
