@@ -114,13 +114,14 @@ export class ArticleService {
     const data = await this.article.find({ select: ['articleType'] });
     const typelist = data.map((item) => item.articleType).join(',');
     const list = Array.from(new Set(typelist.split(','))).join(',');
+    const listArr = list.split(',');
 
     // console.log(data);s
 
     return {
       code: 200,
       message: '查询成功',
-      data: list,
+      data: listArr,
     };
   }
 }
