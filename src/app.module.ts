@@ -7,6 +7,7 @@ import { UserModule } from './user/user.module';
 import { DetailsModule } from './details/details.module';
 import { ActivityModule } from './activity/activity.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UploadModule } from './upload/upload.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       retryAttempts: 10, // 重试次数
       autoLoadEntities: true, // 自动加载实体,
     }),
+    UploadModule,
   ],
   controllers: [AppController],
   providers: [AppService],
