@@ -25,7 +25,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       synchronize: true, // 是否自动创建数据库表
       retryDelay: 500, // 重试间隔时间
       retryAttempts: 10, // 重试次数
-      autoLoadEntities: true, // 自动加载实体
+      autoLoadEntities: true, // 自动加载实体,
     }),
   ],
   controllers: [AppController],
