@@ -29,14 +29,34 @@ export class DetailsService {
     page: number,
     pageSize: number,
   ): Promise<{ data: Detail[]; total: number }> {
+    // 假设 Detail 是一个类型或接口，并且您知道所有字段，除了 content
+    // 这里我们构建一个字段数组，除了 'content' 之外
+    interface aDetail {
+      id: number;
+      type: string;
+      contact: string;
+      // 假设还有其他字段，但你想排除 content
+    }
+
+    const fieldsToSelect: Array<keyof aDetail> = ['id', 'type', 'contact'];
     const [data, total] = await this.detailRepository.findAndCount({
       skip: (page - 1) * pageSize,
       take: pageSize,
+      select: fieldsToSelect, // 这里指定要选择的字段
     });
 
     return { data, total };
   }
 
+  getDetailById(id: number): Promise<Detail> {
+    if (!id) {
+      throw new NotFoundException(`无id查询不到`);
+    }
+    return this.detailRepository.findOne({
+      where: { id },
+      select: ['id', 'content'],
+    });
+  }
   //   // Update Detail
   //   async updateDetail(
   //     id: number,

@@ -1,26 +1,24 @@
 import { Injectable } from '@nestjs/common';
-import { CreateActivityDto } from './dto/create-activity.dto';
-import { UpdateActivityDto } from './dto/update-activity.dto';
-
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Activity } from './entities/activity.entity';
 @Injectable()
 export class ActivityService {
-  create(createActivityDto: CreateActivityDto) {
-    return 'This action adds a new activity';
-  }
-
+  constructor(
+    @InjectRepository(Activity)
+    private readonly ActivityRepository: Repository<Activity>,
+  ) {}
   findAll() {
-    return `This action returns all activity`;
+    return this.ActivityRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} activity`;
-  }
-
-  update(id: number, updateActivityDto: UpdateActivityDto) {
-    return `This action updates a #${id} activity`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} activity`;
+  create(createActivityDto: any) {
+    if (!createActivityDto) {
+      throw new Error('参数错误');
+    }
+    if (!createActivityDto.creator) {
+      createActivityDto.creator = 'CodePaint';
+    }
+    return this.ActivityRepository.save(createActivityDto);
   }
 }

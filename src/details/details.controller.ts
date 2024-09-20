@@ -22,6 +22,11 @@ export class DetailsController {
   ): Promise<{ data: Detail[]; total: number }> {
     return this.detailsService.getDetailsWithPagination(page, pageSize);
   }
+
+  @Get('/get')
+  async getDetailById(@Query('id') id: number): Promise<Detail> {
+    return this.detailsService.getDetailById(id);
+  }
   // @Post('update')
   // async updateDetail(
   //   @Query('id') id: number,
