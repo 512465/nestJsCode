@@ -12,7 +12,7 @@ import { diskStorage } from 'multer';
 export class UploadController {
   constructor(private readonly uploadService: UploadService) {}
 
-  @Post()
+  @Post('avatar')
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
@@ -27,6 +27,24 @@ export class UploadController {
   async uploadFile(@UploadedFile() file: Express.Multer.File) {
     console.log(file, 'file');
     const filePath = await this.uploadService.handleFileUpload(file);
+    return filePath;
+  }
+
+  @Post('photo')
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: diskStorage({
+        destination: './uploads',
+        filename: (req, file, cb) => {
+          const uniqueSuffix = `${Date.now()}-${file.originalname}`;
+          cb(null, uniqueSuffix); // 返回文件名
+        },
+      }),
+    }),
+  )
+  async uploadFile2(@UploadedFile() file: Express.Multer.File) {
+    console.log(file, 'file');
+    const filePath = await this.uploadService.handleFileUpload2(file);
     return filePath;
   }
 }

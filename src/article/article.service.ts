@@ -10,6 +10,7 @@ export class ArticleService {
   constructor(
     @InjectRepository(Article) private readonly article: Repository<Article>,
   ) {}
+
   async create(createArticleDto: CreateArticleDto) {
     const data = new Article();
     data.articleTitle = createArticleDto.articleTitle;
