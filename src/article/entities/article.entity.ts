@@ -17,7 +17,9 @@ export class Article {
   })
   articleCreatedTime: Date;
 
-  @Column()
+  @Column({
+    default: 'CodePaint',
+  })
   articleAuthor: string;
 
   @Column({ type: 'int', default: 0 })
@@ -25,4 +27,7 @@ export class Article {
 
   @Column()
   articleType: string;
+
+  @Column()
+  articleImgUrl: string;
 }
