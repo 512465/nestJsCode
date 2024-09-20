@@ -26,11 +26,6 @@ export class WorkController {
     return this.workService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.workService.findOne(+id);
-  }
-
   @Get('list')
   findByKeyword(
     @Query()
@@ -44,6 +39,11 @@ export class WorkController {
     console.log(query);
 
     return this.workService.findByKeyword(query);
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.workService.findOne(+id);
   }
 
   @Patch(':id')
