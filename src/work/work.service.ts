@@ -61,37 +61,41 @@ export class WorkService {
     }
   }
 
-  async findAllByKeyword(query: {
+  async findByKeyword(query: {
     workTitle?: string;
     workAuthor?: string;
-    page?: number;
-    pageSize?: number;
+    page: number;
+    pageSize: number;
   }) {
     query.page = query.page || 1;
     query.pageSize = query.pageSize || 10;
+
+    const whereClause: any = {};
+    if (query.workTitle) {
+      whereClause.workTitle = Like(`%${query.workTitle}%`);
+    }
+    if (query.workAuthor) {
+      whereClause.workAuthor = Like(`%${query.workAuthor}%`);
+    }
+
     const data = await this.workRepository.find({
-      where: {
-        workTitle: Like(`%${query.workTitle}%`),
-        workAuthor: Like(`%${query.workAuthor}%`),
-      },
+      where: whereClause,
       order: {
         workId: 'DESC',
       },
       skip: (query.page - 1) * query.pageSize,
       take: query.pageSize,
     });
+
     const total = await this.workRepository.count({
-      where: {
-        workTitle: Like(`%${query.workTitle}%`),
-        workAuthor: Like(`%${query.workAuthor}%`),
-      },
+      where: whereClause,
     });
 
-    data.forEach((item) => {
-      const data = new Date(item.workCreateTime);
-      const newDate = data.toISOString().replace('T', ' ').slice(0, 19);
-      item.workCreateTime = new Date(newDate);
-    });
+    // data.forEach((item) => {
+    //   const data = new Date(item.workCreateTime);
+    //   const newDate = data.toISOString().replace('T', ' ').slice(0, 19);
+    //   item.formattedCreateTime = newDate;
+    // });
 
     return {
       code: 200,

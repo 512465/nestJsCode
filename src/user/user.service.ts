@@ -14,10 +14,11 @@ export class UserService {
 
   async create(name: string) {
     const user = await this.loginService.findUser(name);
+    const data = await this.userRepository.findOne({ where: { name } });
     // console.log(user);
     const user2 = await this.userRepository.save({
       ...user,
-      url: 'uploads/1726828478736-工作室头像.png',
+      url: data?.url,
     });
     return user2;
   }

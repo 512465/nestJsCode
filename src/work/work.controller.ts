@@ -31,17 +31,19 @@ export class WorkController {
     return this.workService.findOne(+id);
   }
 
-  @Get('keyword')
+  @Get('list')
   findByKeyword(
     @Query()
     query: {
-      workTitle?: string;
-      workAuthor?: string;
-      page?: number;
-      pageSize?: number;
+      workTitle: string;
+      workAuthor: string;
+      page: number;
+      pageSize: number;
     },
   ) {
-    return this.workService.findAllByKeyword(query);
+    console.log(query);
+
+    return this.workService.findByKeyword(query);
   }
 
   @Patch(':id')

@@ -5,10 +5,10 @@ export class Work {
   @PrimaryGeneratedColumn()
   workId: number;
 
-  @Column()
+  @Column({ default: '' })
   workTitle: string;
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', default: null })
   workDescription: string;
 
   @Column({
@@ -31,4 +31,6 @@ export class Work {
 
   @Column()
   workCover: string;
+
+  formattedCreateTime?: string;
 }
