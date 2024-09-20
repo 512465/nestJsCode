@@ -12,4 +12,6 @@ export class CreateArticleDto {
   articleLookCount: number;
 
   articleType: string;
+
+  articleImgUrl: string;
 }
