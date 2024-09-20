@@ -4,6 +4,7 @@ import { UploadController } from './upload.controller';
 import { MulterModule } from '@nestjs/platform-express';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { UserModule } from 'src/user/user.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { join } from 'path';
     MulterModule.register({
       dest: './uploads',
     }),
+    UserModule,
   ],
   controllers: [UploadController],
   providers: [UploadService],

@@ -36,6 +36,10 @@ export class LoginService {
     return await this.loginRepository.findOne({ where: { password } });
   }
 
+  async findUser(username: string) {
+    return await this.loginRepository.findOne({ where: { username } });
+  }
+
   async save(login: Login) {
     // console.log(login);
     return await this.loginRepository.save(login);

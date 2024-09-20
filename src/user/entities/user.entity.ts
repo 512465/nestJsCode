@@ -1,14 +1,16 @@
-import { Entity, Column, PrimaryColumn, ManyToOne } from 'typeorm';
-import { Login } from '../../login/entities/login.entity';
+import { Entity, Column, PrimaryColumn } from 'typeorm';
 
 @Entity()
 export class User {
   @PrimaryColumn({ default: '123456' })
   id: string;
 
-  @Column()
+  @Column({ default: 'CodePaint' })
   name: string;
 
-  @ManyToOne(() => Login, (login) => login.users)
-  login: Login;
+  @Column()
+  password: string;
+
+  @Column({ default: 'uploads/1726828478736-工作室头像.png' })
+  url: string;
 }

@@ -27,7 +27,6 @@ export class UploadController {
   async uploadFile(@UploadedFile() file: Express.Multer.File) {
     console.log(file, 'file');
     const filePath = await this.uploadService.handleFileUpload(file);
-
     return filePath;
   }
 }

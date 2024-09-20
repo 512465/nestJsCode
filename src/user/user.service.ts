@@ -13,9 +13,13 @@ export class UserService {
   ) {}
 
   async create(name: string) {
-    const user = await this.loginService.findOne(name);
+    const user = await this.loginService.findUser(name);
     // console.log(user);
-    return user;
+    const user2 = await this.userRepository.save({
+      ...user,
+      url: 'uploads/1726828478736-工作室头像.png',
+    });
+    return user2;
   }
 
   async update(password: string, newPassword: string) {
@@ -32,6 +36,11 @@ export class UserService {
     }
     // console.log(user);
     await this.loginService.save(user);
+    await this.userRepository.save(user);
     return user;
+  }
+
+  async save(user: User) {
+    return this.userRepository.save(user);
   }
 }
