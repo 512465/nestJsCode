@@ -8,6 +8,7 @@ import { DetailsModule } from './details/details.module';
 import { ActivityModule } from './activity/activity.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UploadModule } from './upload/upload.module';
+import { WorkModule } from './work/work.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { UploadModule } from './upload/upload.module';
       autoLoadEntities: true, // 自动加载实体,
     }),
     UploadModule,
+    WorkModule,
   ],
   controllers: [AppController],
   providers: [AppService],

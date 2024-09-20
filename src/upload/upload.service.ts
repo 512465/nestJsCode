@@ -6,6 +6,8 @@ import { UserService } from '../user/user.service';
 @Injectable()
 export class UploadService {
   constructor(private readonly userService: UserService) {}
+
+  // upload上传头像
   async handleFileUpload(file: Express.Multer.File) {
     const new2path = `uploads${path.sep}${file.filename}`;
     console.log(new2path);
@@ -19,6 +21,17 @@ export class UploadService {
     return {
       code: 200,
       data: new2path.replace(/\\/g, '/'),
+      msg: '上传成功',
+    };
+  }
+
+  // upload上传图片(通用)
+  async handleFileUpload2(file: Express.Multer.File) {
+    const newpath = `uploads${path.sep}${file.filename}`;
+    console.log(newpath);
+    return {
+      code: 200,
+      data: newpath.replace(/\\/g, '/'),
       msg: '上传成功',
     };
   }

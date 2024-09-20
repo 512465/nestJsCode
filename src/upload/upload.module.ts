@@ -19,5 +19,6 @@ import { UserModule } from 'src/user/user.module';
   ],
   controllers: [UploadController],
   providers: [UploadService],
+  exports: [UploadService],
 })
 export class UploadModule {}
