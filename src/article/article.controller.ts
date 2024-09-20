@@ -26,18 +26,18 @@ export class ArticleController {
     return this.articleService.findAll();
   }
 
-  @Get('keyword')
-  findAllByKeyword(
-    @Query() query: { keyWord: string; page: number; pageSize: number },
+  @Get('list')
+  findByCondition(
+    @Query()
+    query: {
+      keyWord: string;
+      type: string;
+      author: string;
+      page: number;
+      pageSize: number;
+    },
   ) {
-    return this.articleService.findAllByKeyword(query);
-  }
-
-  @Get('type')
-  findAllByType(
-    @Query() query: { type: string; page: number; pageSize: number },
-  ) {
-    return this.articleService.findAllByType(query);
+    return this.articleService.findByCondition(query);
   }
 
   @Get('typelist')

@@ -18,6 +18,7 @@ export class ArticleService {
     data.articleAuthor = createArticleDto.articleAuthor;
     data.articleLookCount = createArticleDto.articleLookCount;
     data.articleType = createArticleDto.articleType;
+    data.articleImgUrl = createArticleDto.articleImgUrl;
     return await this.article.save(data).then(() => {
       return { code: 200, message: '创建成功', data: data };
     });
@@ -25,9 +26,9 @@ export class ArticleService {
 
   async findAll() {
     return await this.article.find().then((data) => {
-      data.forEach((item) => {
-        delete item.articleContent;
-      });
+      // data.forEach((item) => {
+      //   // delete item.articleContent;
+      // });
       return { code: 200, message: '查询成功', data: data };
     });
   }
@@ -40,53 +41,47 @@ export class ArticleService {
     return { code: 200, message: '查询成功', data: data };
   }
 
-  async findAllByKeyword(query: {
-    keyWord: string;
+  async findByCondition(query: {
+    keyWord?: string;
+    type?: string;
+    author?: string;
     page: number;
     pageSize: number;
   }) {
     query.page = query.page || 1;
     query.pageSize = query.pageSize || 10;
-    const data = await this.article.find({
-      where: {
-        articleTitle: Like(`%${query.keyWord}%`),
-      },
-      order: {
-        articleId: 'DESC',
-      },
-      skip: (query.page - 1) * query.pageSize,
-      take: query.pageSize,
-    });
-    const total = await this.article.count({
-      where: {
-        articleTitle: Like(`%${query.keyWord}%`),
-      },
-    });
-    return {
-      code: 200,
-      message: '查询成功',
-      total: total,
-      data: data,
-    };
-  }
 
-  async findAllByType(query: { type: string; page: number; pageSize: number }) {
-    query.page = query.page || 1;
-    query.pageSize = query.pageSize || 10;
+    const whereClause: any = {};
+
+    if (query.keyWord) {
+      whereClause.articleTitle = Like(`%${query.keyWord}%`);
+    }
+
+    if (query.type) {
+      whereClause.articleType = Like(`%${query.type}%`);
+    }
+    if (query.author) {
+      whereClause.articleAuthor = Like(`%${query.author}%`);
+    }
+
     const data = await this.article.find({
-      where: {
-        articleType: Like(`%${query.type}%`),
-      },
+      where: whereClause,
       order: {
         articleId: 'DESC',
       },
       skip: (query.page - 1) * query.pageSize,
       take: query.pageSize,
     });
+
     const total = await this.article.count({
-      where: {
-        articleType: Like(`%${query.type}%`),
-      },
+      where: whereClause,
+    });
+
+    data.forEach((item) => {
+      delete item.articleContent;
+      // const date = new Date(item.articleCreatedTime);
+      // const newDate = date.toISOString().replace('T', ' ').substring(0, 19);
+      // item.articleCreatedTime = new Date(newDate);
     });
     return {
       code: 200,
