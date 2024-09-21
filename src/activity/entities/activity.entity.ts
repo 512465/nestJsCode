@@ -3,6 +3,7 @@ import {
   PrimaryGeneratedColumn,
   Column,
   UpdateDateColumn,
+  CreateDateColumn,
 } from 'typeorm';
 @Entity()
 export class Activity {
@@ -23,6 +24,9 @@ export class Activity {
 
   @Column()
   content: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
 
   @UpdateDateColumn()
   updateTime: Date;

@@ -2,6 +2,6 @@ export class CreateActivityDto {
   title: string;
   content: string;
   intro: string;
-  picture: string;
+  picture: File;
   creator: string;
 }
