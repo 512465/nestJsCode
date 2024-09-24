@@ -5,4 +5,5 @@ export class CreateWorkDto {
   workLookCount: number;
   workType: string;
   workCover: string;
+  workTags: string[];
 }

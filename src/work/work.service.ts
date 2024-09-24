@@ -16,12 +16,14 @@ export class WorkService {
 
   async create(createWorkDto: CreateWorkDto) {
     const work = new Work();
+    // console.log(work);
     work.workTitle = createWorkDto.workTitle;
     work.workDescription = createWorkDto.workDescription;
     work.workAuthor = createWorkDto.workAuthor;
     work.workLookCount = createWorkDto.workLookCount;
     work.workType = createWorkDto.workType;
     work.workCover = createWorkDto.workCover;
+    work.workTags = createWorkDto.workTags;
     await this.workRepository.save(work);
     return {
       code: 200,

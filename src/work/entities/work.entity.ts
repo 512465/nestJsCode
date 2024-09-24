@@ -32,5 +32,8 @@ export class Work {
   @Column()
   workCover: string;
 
+  @Column('simple-array') // simple-array 需要设置为空字符串
+  workTags: string[] = []; // 初始化为空数组
+
   formattedCreateTime?: string;
 }
