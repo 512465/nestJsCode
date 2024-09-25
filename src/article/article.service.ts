@@ -38,6 +38,12 @@ export class ArticleService {
     if (data.length === 0) {
       return { code: 500, message: '文章未找到', data: null };
     }
+    // console.log(data[0].articleLookCount);
+    data[0].articleLookCount += 1;
+    await this.article.save({
+      ...data[0],
+      articleLookCount: data[0].articleLookCount,
+    });
     return { code: 200, message: '查询成功', data: data };
   }
 
