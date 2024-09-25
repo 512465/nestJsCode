@@ -10,6 +10,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UploadModule } from './upload/upload.module';
 import { WorkModule } from './work/work.module';
 import { WeatherModule } from './weather/weather.module';
+import { CountModule } from './count/count.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { WeatherModule } from './weather/weather.module';
     UploadModule,
     WorkModule,
     WeatherModule,
+    CountModule,
   ],
   controllers: [AppController],
   providers: [AppService],

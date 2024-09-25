@@ -126,4 +126,10 @@ export class ArticleService {
       data: listArr,
     };
   }
+
+  async saveCount(data: Article) {
+    await this.article.save({
+      ...data,
+    });
+  }
 }

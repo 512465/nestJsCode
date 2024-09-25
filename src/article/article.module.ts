@@ -8,6 +8,7 @@ import { Article } from './entities/article.entity';
   imports: [TypeOrmModule.forFeature([Article])],
   controllers: [ArticleController],
   providers: [ArticleService],
+  exports: [ArticleService],
 })
 export class ArticleModule {}
 //666

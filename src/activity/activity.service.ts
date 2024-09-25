@@ -76,10 +76,17 @@ export class ActivityService {
 
     return recentActivity[0]; // 返回第一个活动
   }
+
   async delete(id: number) {
     if (!id) {
       throw new Error('参数错误');
     }
     return this.ActivityRepository.delete(id);
+  }
+
+  async saveCount(data: Activity) {
+    return await this.ActivityRepository.save({
+      ...data,
+    });
   }
 }
