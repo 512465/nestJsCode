@@ -30,4 +30,10 @@ export class Activity {
 
   @UpdateDateColumn()
   updateTime: Date;
+
+  @Column({
+    type: 'int',
+    default: 0,
+  })
+  activityLookCount: number;
 }

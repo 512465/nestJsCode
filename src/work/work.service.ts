@@ -55,6 +55,11 @@ export class WorkService {
         data: null,
       };
     } else {
+      data[0].workLookCount += 1;
+      await this.workRepository.save({
+        ...data[0],
+        workLookCount: data[0].workLookCount,
+      });
       return {
         code: 200,
         message: '查询成功',

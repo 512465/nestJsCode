@@ -41,7 +41,25 @@ export class ActivityService {
     if (!id) {
       throw new Error('参数错误');
     }
-    return this.ActivityRepository.findOneBy({ id });
+    const data = await this.ActivityRepository.findOneBy({ id });
+    if (!data) {
+      return {
+        code: 500,
+        message: '没有找到该活动',
+        data: null,
+      };
+    } else {
+      data.activityLookCount += 1;
+      await this.ActivityRepository.save({
+        ...data,
+        activityLookCount: data.activityLookCount,
+      });
+      return {
+        code: 200,
+        message: '查询成功',
+        data: data,
+      };
+    }
   }
 
   async getRecent(): Promise<Activity> {
