@@ -26,9 +26,9 @@ export class ArticleService {
 
   async findAll() {
     return await this.article.find().then((data) => {
-      // data.forEach((item) => {
-      //   // delete item.articleContent;
-      // });
+      data.forEach((item) => {
+        delete item.articleContent;
+      });
       return { code: 200, message: '查询成功', data: data };
     });
   }
