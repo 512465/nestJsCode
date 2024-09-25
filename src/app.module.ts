@@ -9,6 +9,7 @@ import { ActivityModule } from './activity/activity.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UploadModule } from './upload/upload.module';
 import { WorkModule } from './work/work.module';
+import { WeatherModule } from './weather/weather.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { WorkModule } from './work/work.module';
     }),
     UploadModule,
     WorkModule,
+    WeatherModule,
   ],
   controllers: [AppController],
   providers: [AppService],
