@@ -138,10 +138,4 @@ export class WorkService {
       data: data,
     };
   }
-
-  async saveCount(data: Work) {
-    return await this.workRepository.save({
-      ...data,
-    });
-  }
 }

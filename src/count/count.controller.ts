@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { CountService } from './count.service';
 
 @Controller('count')
@@ -23,17 +23,17 @@ export class CountController {
   }
 
   @Get('workCount')
-  async getWorkCount(@Query() query: { id: number }) {
-    return await this.countService.getWorkCount(query.id);
+  async getWorkCount() {
+    return await this.countService.getWorkCount();
   }
 
   @Get('articleCount')
-  async getArticleCount(@Query() query: { id: number }) {
-    return await this.countService.getArticleCount(query.id);
+  async getArticleCount() {
+    return await this.countService.getArticleCount();
   }
 
   @Get('activityCount')
-  async getActivityCount(@Query() query: { id: number }) {
-    return await this.countService.getActivityCount(query.id);
+  async getActivityCount() {
+    return await this.countService.getActivityCount();
   }
 }

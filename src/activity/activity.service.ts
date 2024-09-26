@@ -84,9 +84,7 @@ export class ActivityService {
     return this.ActivityRepository.delete(id);
   }
 
-  async saveCount(data: Activity) {
-    return await this.ActivityRepository.save({
-      ...data,
-    });
+  async findAll() {
+    return this.ActivityRepository.find();
   }
 }

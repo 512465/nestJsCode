@@ -95,39 +95,33 @@ export class CountService {
     };
   }
 
-  async getWorkCount(id: number) {
-    const data = await this.workService.findOne(id);
-    data.data[0].workLookCount -= 1;
-    // console.log(data.data[0].workLookCount);
-    await this.workService.saveCount(data.data[0]);
+  async getWorkCount() {
+    const data = await this.workService.findAll();
+    // console.log(data.data.length);
     return {
       code: 200,
       message: '成功',
-      data: data.data[0].workLookCount,
+      data: data.data.length,
     };
   }
 
-  async getArticleCount(id: number) {
-    const data = await this.articleService.findOne(id);
-    data.data[0].articleLookCount -= 1;
-    console.log(data.data[0].articleLookCount);
-    await this.articleService.saveCount(data.data[0]);
+  async getArticleCount() {
+    const data = await this.articleService.findAll();
+    // console.log(data.data.length);
     return {
       code: 200,
       message: '成功',
-      data: data.data[0].articleLookCount,
+      data: data.data.length,
     };
   }
 
-  async getActivityCount(id: number) {
-    const data = await this.activityService.getDetail(id);
-    data.data.activityLookCount -= 1;
-    console.log(data.data.activityLookCount);
-    await this.activityService.saveCount(data.data);
+  async getActivityCount() {
+    const data = await this.activityService.findAll();
+    // console.log(data.length);
     return {
       code: 200,
       message: '成功',
-      data: data.data.activityLookCount,
+      data: data.length,
     };
   }
 }
