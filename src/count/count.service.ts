@@ -17,7 +17,7 @@ export class CountService {
     private readonly activityService: ActivityService,
   ) {}
 
-  @Cron('0 4 * * *') // 每天凌晨4点
+  @Cron('10 0 * * *') // 每天凌晨4点
   handleCron() {
     this.create();
   }
@@ -42,8 +42,9 @@ export class CountService {
 
   async addCount(accessTime: string) {
     const [accessTime2] = accessTime.split(' ');
+    console.log(accessTime);
     const [year, month, day, ,] = accessTime2.split('/');
-    // console.log(year, month, day);
+    console.log(year, month, day);
 
     const data = await this.countRepository
       .createQueryBuilder('entity')
