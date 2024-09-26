@@ -1,15 +1,14 @@
-import { Controller, Get, Post, Body, Query } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { CountService } from './count.service';
-import { CreateCountDto } from './dto/create-count.dto';
 
 @Controller('count')
 export class CountController {
   constructor(private readonly countService: CountService) {}
 
-  @Post()
-  create(@Body() createCountDto: CreateCountDto) {
-    return this.countService.create(createCountDto);
-  }
+  // @Post()
+  // create(@Body() createCountDto: CreateCountDto) {
+  //   return this.countService.create(createCountDto);
+  // }
 
   @Get()
   async addCount() {

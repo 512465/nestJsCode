@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCountDto } from './dto/create-count.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Count } from './entities/count.entity';
+import { Cron } from '@nestjs/schedule';
 import { Repository } from 'typeorm';
 import { WorkService } from 'src/work/work.service';
 import { ArticleService } from 'src/article/article.service';
@@ -17,12 +17,18 @@ export class CountService {
     private readonly activityService: ActivityService,
   ) {}
 
-  async create(createCountDto: CreateCountDto) {
+  @Cron('0 4 * * *') // 每天凌晨4点
+  handleCron() {
+    this.create();
+  }
+
+  async create() {
     const data = new Count();
-    data.pageCount = createCountDto.pageCount;
-    const accessTime = new Date();
+    data.pageCount = 0;
+    const accessTime = new Date().toLocaleDateString();
     await this.countRepository.save({
       ...data,
+      accessTime: accessTime,
     });
     return {
       code: 200,
