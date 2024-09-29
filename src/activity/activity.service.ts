@@ -62,10 +62,10 @@ export class ActivityService {
     }
   }
 
-  async getRecent(): Promise<Activity> {
+  async getRecent() {
     const recentActivity = await this.ActivityRepository.find({
       order: { createdAt: 'DESC' }, // 按照 createdAt 字段降序排列
-      take: 1, // 只取一条记录
+      take: 4, // 只取一条记录
       select: {
         id: true,
         title: true,
@@ -74,7 +74,7 @@ export class ActivityService {
       },
     });
 
-    return recentActivity[0]; // 返回第一个活动
+    return recentActivity; // 返回第一个活动
   }
 
   async delete(id: number) {
