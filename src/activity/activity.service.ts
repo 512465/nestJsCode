@@ -74,7 +74,7 @@ export class ActivityService {
       },
     });
 
-    return recentActivity; // 返回第一个活动
+    return recentActivity; // 返回近期4个活动
   }
 
   async delete(id: number) {
