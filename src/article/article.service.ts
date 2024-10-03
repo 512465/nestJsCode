@@ -25,13 +25,24 @@ export class ArticleService {
     });
   }
 
-  async findAll() {
-    return await this.article.find().then((data) => {
-      data.forEach((item) => {
-        delete item.articleContent;
-      });
-      return { code: 200, message: '查询成功', data: data };
+  async findAll(query: { page?: number; pageSize?: number }) {
+    query.page = query.page || 1;
+    query.pageSize = query.pageSize || 10;
+    const data = await this.article.find({
+      skip: (query.page - 1) * query.pageSize,
+      take: query.pageSize,
     });
+    data.forEach((item) => {
+      delete item.articleContent;
+    });
+    return { code: 200, message: '查询成功', data: data };
+
+    // return await this.article.find().then((data) => {
+    //   data.forEach((item) => {
+    //     delete item.articleContent;
+    //   });
+    //   return { code: 200, message: '查询成功', data: data };
+    // });
   }
 
   async findOne(id: number) {
@@ -126,5 +137,10 @@ export class ArticleService {
       message: '查询成功',
       data: listArr,
     };
+  }
+
+  async findAll2() {
+    const data = await this.article.find();
+    return { code: 200, message: '查询成功', data: data };
   }
 }

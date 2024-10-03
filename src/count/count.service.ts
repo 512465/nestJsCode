@@ -96,7 +96,7 @@ export class CountService {
   }
 
   async getWorkCount() {
-    const data = await this.workService.findAll();
+    const data = await this.workService.findAll2();
     // console.log(data.data.length);
     return {
       code: 200,
@@ -106,7 +106,7 @@ export class CountService {
   }
 
   async getArticleCount() {
-    const data = await this.articleService.findAll();
+    const data = await this.articleService.findAll2();
     // console.log(data.data.length);
     return {
       code: 200,

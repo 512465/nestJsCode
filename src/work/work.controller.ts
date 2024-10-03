@@ -22,8 +22,8 @@ export class WorkController {
   }
 
   @Get()
-  findAll() {
-    return this.workService.findAll();
+  findAll(@Query() query: { page: number; pageSize: number }) {
+    return this.workService.findAll(query);
   }
 
   @Get('list')

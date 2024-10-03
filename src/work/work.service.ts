@@ -32,18 +32,37 @@ export class WorkService {
     };
   }
 
-  async findAll() {
-    return await this.workRepository.find().then((data) => {
-      data.forEach((item) => {
-        delete item.workDescription;
-        delete item.workCover;
-      });
-      return {
-        code: 200,
-        message: '查询成功',
-        data: data,
-      };
+  async findAll(query: { page?: number; pageSize?: number }) {
+    query.page = query.page || 1;
+    query.pageSize = query.pageSize || 10;
+    const [data, total] = await this.workRepository.findAndCount({
+      skip: (query.page - 1) * query.pageSize,
+      take: query.pageSize,
+      select: {
+        workTitle: true,
+        workAuthor: true,
+        workLookCount: true,
+        workType: true,
+        workTags: true,
+      },
     });
+    return {
+      code: 200,
+      message: '查询成功',
+      data: data,
+      total: total,
+    };
+    // return await this.workRepository.find().then((data) => {
+    //   data.forEach((item) => {
+    //     delete item.workDescription;
+    //     delete item.workCover;
+    //   });
+    //   return {
+    //     code: 200,
+    //     message: '查询成功',
+    //     data: data,
+    //   };
+    // });
   }
 
   async findOne(id: number) {
@@ -135,6 +154,20 @@ export class WorkService {
     return {
       code: 200,
       message: '删除成功',
+      data: data,
+    };
+  }
+
+  async findAll2() {
+    const data = await this.workRepository.find({
+      select: {
+        workDescription: false,
+        workCover: false,
+      },
+    });
+    return {
+      code: 200,
+      message: '查询成功',
       data: data,
     };
   }
