@@ -85,6 +85,8 @@ export class ActivityService {
   }
 
   async findAll() {
-    return this.ActivityRepository.find();
+    return this.ActivityRepository.find({
+      order: { createdAt: 'DESC' }, // 按照 createdAt 字段降序排列
+    });
   }
 }

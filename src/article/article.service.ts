@@ -26,11 +26,14 @@ export class ArticleService {
     });
   }
 
+<<<<<<< HEAD
   async findAll() {
     const data = await this.article.find();
     return { code: 200, message: '查询成功', data: data };
   }
 
+=======
+>>>>>>> master
   async findAllList(query: { page?: number; pageSize?: number }) {
     query.page = query.page || 1;
     query.pageSize = query.pageSize || 10;
@@ -148,4 +151,16 @@ export class ArticleService {
       data: listArr,
     };
   }
+<<<<<<< HEAD
+=======
+
+  async findAll() {
+    const data = await this.article.find({
+      order: {
+        articleId: 'DESC',
+      },
+    });
+    return { code: 200, message: '查询成功', data: data };
+  }
+>>>>>>> master
 }

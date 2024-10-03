@@ -17,7 +17,7 @@ export class CountService {
     private readonly activityService: ActivityService,
   ) {}
 
-  @Cron('10 0 * * *') // 每天凌晨4点
+  @Cron('10 00 * * *') // 每天凌晨00:10点
   handleCron() {
     this.create();
   }
