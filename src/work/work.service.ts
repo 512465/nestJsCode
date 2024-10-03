@@ -38,7 +38,9 @@ export class WorkService {
     const [data, total] = await this.workRepository.findAndCount({
       skip: (query.page - 1) * query.pageSize,
       take: query.pageSize,
+      order: { workId: 'DESC' },
       select: {
+        workId: true,
         workTitle: true,
         workAuthor: true,
         workLookCount: true,
@@ -160,6 +162,9 @@ export class WorkService {
 
   async findAll2() {
     const data = await this.workRepository.find({
+      order: {
+        workId: 'DESC',
+      },
       select: {
         workDescription: false,
         workCover: false,
