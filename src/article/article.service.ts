@@ -19,6 +19,7 @@ export class ArticleService {
     data.articleLookCount = createArticleDto.articleLookCount;
     data.articleType = createArticleDto.articleType;
     data.articleImgUrl = createArticleDto.articleImgUrl;
+    data.articleInfo = createArticleDto.articleInfo;
     return await this.article.save(data).then(() => {
       return { code: 200, message: '创建成功', data: data };
     });

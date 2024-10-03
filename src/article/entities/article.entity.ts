@@ -22,6 +22,9 @@ export class Article {
   })
   articleAuthor: string;
 
+  @Column({ default: '' })
+  articleInfo: string;
+
   @Column({ type: 'int', default: 0 })
   articleLookCount: number;
 
