@@ -12,7 +12,11 @@ export class CountController {
 
   @Get()
   async addCount() {
-    const accessTime = new Date().toLocaleString();
+    const accessTime = new Date().toLocaleString('zh-CN', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    }); //规定时区中国
     // console.log(accessTime);
     return await this.countService.addCount(accessTime);
   }
