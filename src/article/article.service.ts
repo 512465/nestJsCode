@@ -20,22 +20,35 @@ export class ArticleService {
     data.articleType = createArticleDto.articleType;
     data.articleImgUrl = createArticleDto.articleImgUrl;
     data.articleInfo = createArticleDto.articleInfo;
+    data.articleIntro = createArticleDto.articleIntro;
     return await this.article.save(data).then(() => {
       return { code: 200, message: '创建成功', data: data };
     });
   }
 
+<<<<<<< HEAD
+  async findAll() {
+    const data = await this.article.find();
+    return { code: 200, message: '查询成功', data: data };
+  }
+
+=======
+>>>>>>> master
   async findAllList(query: { page?: number; pageSize?: number }) {
     query.page = query.page || 1;
     query.pageSize = query.pageSize || 10;
     const data = await this.article.find({
       skip: (query.page - 1) * query.pageSize,
       take: query.pageSize,
+      order: {
+        articleId: 'DESC',
+      },
     });
     data.forEach((item) => {
       delete item.articleContent;
     });
-    return { code: 200, message: '查询成功', data: data };
+    const total = await this.article.count();
+    return { code: 200, message: '查询成功', data: data, total: total };
 
     // return await this.article.find().then((data) => {
     //   data.forEach((item) => {
@@ -138,6 +151,8 @@ export class ArticleService {
       data: listArr,
     };
   }
+<<<<<<< HEAD
+=======
 
   async findAll() {
     const data = await this.article.find({
@@ -147,4 +162,5 @@ export class ArticleService {
     });
     return { code: 200, message: '查询成功', data: data };
   }
+>>>>>>> master
 }

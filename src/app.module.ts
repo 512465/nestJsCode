@@ -24,7 +24,7 @@ import { CountModule } from './count/count.module';
       host: 'localhost', // 数据库地址
       port: 3306, // 数据库端口
       username: 'root', // 数据库用户名
-      password: '123456', // 数据库密码
+      password: '123690', // 数据库密码
       database: 'codepaint', // 数据库名称
       synchronize: true, // 是否自动创建数据库表
       retryDelay: 500, // 重试间隔时间

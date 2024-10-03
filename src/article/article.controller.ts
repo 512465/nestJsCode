@@ -22,7 +22,11 @@ export class ArticleController {
   }
 
   @Get()
+<<<<<<< HEAD
+  findAllList(@Query() query: { page: number; pageSize: number }) {
+=======
   findAll(@Query() query: { page: number; pageSize: number }) {
+>>>>>>> master
     return this.articleService.findAllList(query);
   }
 
