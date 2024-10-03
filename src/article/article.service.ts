@@ -25,7 +25,7 @@ export class ArticleService {
     });
   }
 
-  async findAll(query: { page?: number; pageSize?: number }) {
+  async findAllList(query: { page?: number; pageSize?: number }) {
     query.page = query.page || 1;
     query.pageSize = query.pageSize || 10;
     const data = await this.article.find({
@@ -139,8 +139,12 @@ export class ArticleService {
     };
   }
 
-  async findAll2() {
-    const data = await this.article.find();
+  async findAll() {
+    const data = await this.article.find({
+      order: {
+        articleId: 'DESC',
+      },
+    });
     return { code: 200, message: '查询成功', data: data };
   }
 }

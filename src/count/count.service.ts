@@ -17,7 +17,7 @@ export class CountService {
     private readonly activityService: ActivityService,
   ) {}
 
-  @Cron('10 0 * * *') // 每天凌晨4点
+  @Cron('10 00 * * *') // 每天凌晨00:10点
   handleCron() {
     this.create();
   }
@@ -106,7 +106,7 @@ export class CountService {
   }
 
   async getArticleCount() {
-    const data = await this.articleService.findAll2();
+    const data = await this.articleService.findAll();
     // console.log(data.data.length);
     return {
       code: 200,
