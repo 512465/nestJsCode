@@ -33,4 +33,7 @@ export class Article {
 
   @Column()
   articleImgUrl: string;
+
+  @Column()
+  articleIntro: string;
 }

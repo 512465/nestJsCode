@@ -106,7 +106,7 @@ export class CountService {
   }
 
   async getArticleCount() {
-    const data = await this.articleService.findAll2();
+    const data = await this.articleService.findAll();
     // console.log(data.data.length);
     return {
       code: 200,

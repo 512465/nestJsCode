@@ -16,4 +16,6 @@ export class CreateArticleDto {
   articleImgUrl: string;
 
   articleInfo: string;
+
+  articleIntro: string;
 }

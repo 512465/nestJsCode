@@ -22,8 +22,8 @@ export class ArticleController {
   }
 
   @Get()
-  findAll(@Query() query: { page: number; pageSize: number }) {
-    return this.articleService.findAll(query);
+  findAllList(@Query() query: { page: number; pageSize: number }) {
+    return this.articleService.findAllList(query);
   }
 
   @Get('list')
