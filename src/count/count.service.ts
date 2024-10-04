@@ -42,9 +42,9 @@ export class CountService {
 
   async addCount(accessTime: string) {
     const [accessTime2] = accessTime.split(' ');
-    console.log(accessTime);
-    const [year, month, day, ,] = accessTime2.split('/');
-    console.log(year, month, day);
+    // console.log(accessTime);
+    const [year, month, day] = accessTime2.split('/');
+    // console.log(year, month, day);
 
     const data = await this.countRepository
       .createQueryBuilder('entity')
@@ -60,6 +60,7 @@ export class CountService {
         ), // 下一天开始
       })
       .getMany();
+    // console.log(data[0]);
 
     if (!data[0]) {
       return {
