@@ -17,5 +17,5 @@ export class CreateArticleDto {
 
   articleInfo: string;
 
-  articleIntro: string;
+  // articleIntro: string;
 }

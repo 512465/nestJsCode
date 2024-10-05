@@ -20,7 +20,7 @@ export class ArticleService {
     data.articleType = createArticleDto.articleType;
     data.articleImgUrl = createArticleDto.articleImgUrl;
     data.articleInfo = createArticleDto.articleInfo;
-    data.articleIntro = createArticleDto.articleIntro;
+    // data.articleIntro = createArticleDto.articleIntro;
     return await this.article.save(data).then(() => {
       return { code: 200, message: '创建成功', data: data };
     });
