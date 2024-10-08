@@ -35,10 +35,16 @@ export class DetailsService {
       id: number;
       type: string;
       contact: string;
+      updateTime: Date;
       // 假设还有其他字段，但你想排除 content
     }
 
-    const fieldsToSelect: Array<keyof aDetail> = ['id', 'type', 'contact'];
+    const fieldsToSelect: Array<keyof aDetail> = [
+      'id',
+      'type',
+      'contact',
+      'updateTime',
+    ];
     const [data, total] = await this.detailRepository.findAndCount({
       skip: (page - 1) * pageSize,
       take: pageSize,
