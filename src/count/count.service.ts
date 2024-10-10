@@ -17,7 +17,7 @@ export class CountService {
     private readonly activityService: ActivityService,
   ) {}
 
-  @Cron('00 04 * * *') // 每天凌晨04:00点
+  @Cron('00 4 * * *') // 每天凌晨4:00点
   handleCron() {
     this.create();
   }
@@ -25,7 +25,16 @@ export class CountService {
   async create() {
     const data = new Count();
     data.pageCount = 0;
-    const accessTime = new Date().toLocaleDateString();
+    const accessTime = new Date().toLocaleString('zh-CN', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    });
+    // console.log(accessTime);
+
     await this.countRepository.save({
       ...data,
       accessTime: accessTime,
